@@ -1,0 +1,33 @@
+<html>
+<head>
+    <title>Flask guess game</title>
+    
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+</head>
+
+<body>
+
+    <h1>Guess game</h1>
+    
+    <form action="" id="guessform">
+        <input type="text" name="guesstext" placeholder="Place a number between 0 and 100 ..." />
+        <input type="submit" name="guesssubmit" value="Guess" />
+    </form>
+    
+    <div id="result">
+    
+    </div>
+    
+    <script>
+        $("guesssubmit").click(function(){
+            $.post("/guess", { 
+                "number": $("#guesstext").val() 
+            }, 
+            function(result) {
+                $("#result").val(result);
+            }
+        }
+    </script>
+
+</body>
+</html>
