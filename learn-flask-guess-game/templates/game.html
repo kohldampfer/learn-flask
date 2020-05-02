@@ -10,22 +10,26 @@
     <h1>Guess game</h1>
     
     <form action="" id="guessform">
-        <input type="text" name="guesstext" placeholder="Place a number between 0 and 100 ..." />
-        <input type="submit" name="guesssubmit" value="Guess" />
+        <input type="text" id="guesstext" placeholder="Place a number between 0 and 100 ..." />
+ 
     </form>
     
-    <div id="result">
+    <a href="#" onclick="javascript:submitclick();">Submit</a>
     
+    <div id="result">
     </div>
     
     <script>
-        $("guesssubmit").click(function(){
-            $.post("/guess", { 
-                "number": $("#guesstext").val() 
-            }, 
-            function(result) {
-                $("#result").val(result);
-            }
+    function submitclick(){
+        $.ajax({
+                type: 'POST',
+                url: '/guess',
+                data: JSON.stringify({number: document.getElementById("guesstext").value}),
+                contentType: "application/json",
+                dataType: 'text'
+            }).always(function(data) {
+                alert(data);
+            });
         }
     </script>
 
